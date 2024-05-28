@@ -1,0 +1,27 @@
+services:
+  app:
+    image: falcowalko/project-hosting-test:latest
+    container_name: laravel-app
+    ports:
+      - "8080:80"
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql:8.0
+    container_name: laravel-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: Team5321!
+
+  redis:
+    image: redis:latest
+    container_name: laravel-redis
+    ports:
+      - "6379:6379"
